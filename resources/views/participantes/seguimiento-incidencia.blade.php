@@ -29,7 +29,7 @@
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div>
-                                <span class="fw-bold"><i class="bi bi-telephone-fill"></i>&nbsp;&nbsp;Teléfono(s):</span>
+                                <span class="fw-bold"><img src="{{ asset('img/phone.png') }}">&nbsp;&nbsp;Teléfono(s):</span>
                                 <ul>
                                     @foreach ($telefonos as $telefono)
                                     <li>{{ $telefono->telefono }} ({{ $telefono->tipo }})</li>
@@ -37,7 +37,7 @@
                                 </ul>
                             </div>
                             <div>
-                                <span class="fw-bold"><i class="bi bi-envelope-fill"></i>&nbsp;&nbsp;Correo(s) electrónico(s):</span>
+                                <span class="fw-bold"><img src="{{ asset('img/email.png') }}">&nbsp;&nbsp;Correo(s) electrónico(s):</span>
                                 <ul>
                                     @foreach ($emails as $email)
                                     <li>{{ $email->email }}</li>
@@ -58,8 +58,10 @@
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="warning:">
+                                    <use xlink:href="#exclamation-triangle-fill" />
+                                </svg>
                                 <div>
-                                    <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;
                                     No se encontraron datos de preparación del aspirante.
                                 </div>
                             </div>    
@@ -97,7 +99,8 @@
                                         <td>{{ $participacion->posicion }}</td>
                                         <td>
                                             <a href="{{ route('participantes.detail-proceso', ['participacion_id' => $participacion->participacion_id]) }}"
-                                            class="btn btn-success btn-sm"><i class="bi bi-eye-fill" title="Ver detalle"></i></a>
+                                            class="btn btn-success btn-sm"><img src="{{ asset('img/view.png') }}"
+                                                alt="Ver resultatos completos" title="Ver resultatos completos"></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -140,7 +143,7 @@
                                             <small class="d-inline-flex mb-3 px-2 py-1 fw-semibold text-{{ $label }} bg-{{ $label }} bg-opacity-10 border border-{{ $label }} border-opacity-10 rounded-2">{{ $incidencia->desc_estatus }}</small>
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-success btn-sm"><i class="bi bi-eye-fill" title="Ver detalle"></i></a>
+                                            <a href="#" class="btn btn-success btn-sm"><img src="{{ asset('img/view.png') }}"  alt="Ver detalle de la incidencia" title="Ver detalle de la incidencia"></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -148,14 +151,17 @@
                                 @else
                                 {{-- Si no existen incidencias despliega mensaje --}}
                                 <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="warning:">
+                                        <use xlink:href="#exclamation-triangle-fill" />
+                                    </svg>
                                     <div>
-                                        <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;
                                         No se encontraron incidencias reportadas del aspirante.
                                     </div>
                                 </div> 
                                 @endif
                             <a href="{{ route('participantes.incidencias', ['participante_id' => $participante->id, 'participacion_id' => 0]) }}"
-                                class="btn btn-secondary"><i class="bi bi-exclamation-circle-fill" title="Incidencias"></i>&nbsp;&nbsp;Agregar incidencia</a>
+                                class="btn btn-secondary"><img src="{{ asset('img/warning.png') }}"
+                                    alt="Ver datos del participante" title="Ver datos del participante">&nbsp;&nbsp;Agregar incidencia</a>
                         </div>
                     </div>
                 </div>

@@ -8,11 +8,12 @@
                 <div class="card-header">{{ __('Bienvenido(a)') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    @php $user = \Auth::user(); @endphp
+                    <h5>
+                        {{ $user->name }}
+                        <br>
+                        <small class="text-muted">{{ $user->email }}</small>
+                    </h5>
                 </div>
             </div>
         </div>

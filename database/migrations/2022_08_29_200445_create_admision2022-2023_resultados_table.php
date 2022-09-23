@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('documentos_incidencias', function (Blueprint $table) {
+        Schema::create('admision2022-2023_resultados', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('incidencia_id')->unsigned();
-            $table->string('path', 50);
-            $table->tinyInteger('requiere_respuesta')->unsigned();
             $table->timestamps();
-
-            $table->foreign('incidencia_id')->references('id')->on('incidencias');
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documentos_incidencias');
+        Schema::dropIfExists('admision2022-2023_resultados');
     }
 };

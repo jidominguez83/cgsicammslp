@@ -3,6 +3,8 @@
 use App\Http\Controllers\ParticipacionProcesoController;
 use App\Http\Controllers\ParticipanteController;
 use App\Http\Controllers\IncidenciaController;
+use App\Models\Incidencia;
+use App\Models\ParticipacionProceso;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -25,7 +27,9 @@ Route::get('/participantes/detalle-proceso/{participacion_id?}', [ParticipacionP
 Route::get('/participantes/detalles/{participante_id?}', [ParticipanteController::class, 'details'])->name('participantes.details');
 Route::post('/participantes/buscar', [ParticipanteController::class, 'search'])->name('participantes.buscar');
 Route::get('/participantes/incidencias/{participante_id?}/{participacion_id?}', [IncidenciaController::class, 'create'])->name('participantes.incidencias');
+Route::post('/participantes/incidencias/save', [IncidenciaController::class, 'save'])->name('incidencias.save');
+Route::get('/importar-listas/{proceso_id?}/{ciclo?}', [ParticipacionProcesoController::class, 'importar'])->name('participantes.importar-listas');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -55,7 +55,7 @@ class ParticipacionProcesoController extends Controller
 
         } else {
 
-            Session::flash('no-encontrado', 'No se ha encontrado ningún aspirante registrado para este tipo de valoración.');
+            Session::flash('no-encontrado', 'No se ha encontrado ningún aspirante registrado para este proceso y tipo de valoración.');
 
             return view('participantes.list', [
                 'participantes' => $participantes,
@@ -78,6 +78,7 @@ class ParticipacionProcesoController extends Controller
                                                         'participantes.apellido_materno',
                                                         'tipo_valoraciones.nombre AS nombre_valoracion',
                                                         'lenguas.nombre AS nombre_lengua',
+                                                        'procesos.id AS proceso_id',
                                                         'procesos.nombre AS nombre_proceso',
                                                         'tipo_funciones.nombre AS nombre_funcion')
                                                 ->join('participantes', 'participante_id', '=', 'participantes.id')
@@ -91,10 +92,23 @@ class ParticipacionProcesoController extends Controller
 
         $incidencias = Incidencia::select('descripcion')
                                     ->where('participacion_proceso_id', $participacion->id);
-//dd($incidencias);
+
         return view('participantes.detail-proceso', [
             'participacion' => $participacion,
             'incidencias' => $incidencias
         ]);
+    }
+
+    public function importar($proceso_id, $ciclo){
+        $proceso = Proceso::find($proceso_id);
+
+        return view('participantes.importar-listas', [
+            'proceso' => $proceso,
+            'ciclo' => $ciclo
+        ]);
+    }
+
+    public function subirLista(){
+        
     }
 }

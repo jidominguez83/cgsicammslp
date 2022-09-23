@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Participante;
 use App\Models\Telefono;
 use App\Models\Email;
+use App\Models\Incidencia;
 use App\Models\ParticipacionProceso;
 use Illuminate\Http\Request;
 
@@ -42,11 +43,24 @@ class ParticipanteController extends Controller
                                                     ->where('participante_id', $participante_id)
                                                     ->get();
 
+        $incidencias = Incidencia::select('incidencias.*',
+                                            'procesos.nombre AS nombre_proceso',
+                                            'ciclo',
+                                            'estatuses.descripcion AS desc_estatus')
+                                    ->join('participacion_procesos', 'participacion_proceso_id', '=', 'participacion_procesos.id')
+                                    ->join('estatuses', 'incidencias.estatus', '=', 'estatuses.id')
+                                    ->join('valoracion_nivel_sostenimiento', 'valoracion_nivel_sostenimiento_id', '=', 'valoracion_nivel_sostenimiento.id')
+                                    ->join('tipo_valoraciones', 'tipo_valoracion_id', '=', 'tipo_valoraciones.id')
+                                    ->join('procesos', 'proceso_id', '=', 'procesos.id')
+                                    ->where('participante_id', $participante_id)
+                                    ->get();                                
+
         return view('participantes.details', [
             'participante' => $participante,
             'telefonos' => $telefonos,
             'emails' => $emails,
-            'participaciones' => $participaciones
+            'participaciones' => $participaciones,
+            'incidencias' => $incidencias
         ]); 
     }
 

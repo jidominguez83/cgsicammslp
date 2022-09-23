@@ -21,7 +21,7 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <form method="POST" action="#">
+                                <form method="POST" action="{{ route('incidencias.save') }}">
                                     @csrf
                                     <h4>
                                         {{ $participante->nombre." ".
@@ -30,6 +30,8 @@
                                         <br>
                                         <small class="text-muted">{{ $participante->curp }}</small>
                                     </h4>
+
+                                    <input type="hidden" name="participante" value="{{ $participante->id }}">
 
                                     <div class="form-floating">
                                         <select class="form-select" id="floatingSelect"
@@ -59,7 +61,7 @@
                                     <div class="collapse multi-collapse" id="multiCollapseExample2">
                                     <br>
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label"><img src="{{ asset('img/pdf-gray.png') }}">&nbsp;Subir documento en formato PDF</label>
+                                        <label for="formFile" class="form-label"><i class="bi bi-file-earmark-pdf-fill"></i>&nbsp;Subir documento en formato PDF</label>
                                         <input class="form-control" type="file" id="formFile" name="documento">
                                     </div>
                                     <div class="form-check form-switch">
@@ -68,7 +70,7 @@
                                     </div>
                                     </div>
                                     <br>
-                                    <button type="button" class="btn btn-success">Guardar incidencia</button>
+                                    <button type="submit" class="btn btn-success">Guardar incidencia</button>
                                 </form>
                             </div>
                         </div>
@@ -83,6 +85,38 @@
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
+                                {{-- Si existen incidencias las despliega --}}
+                                @if (count($incidencias) > 0)
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Proceso</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Estatus</th>
+                                        <th scope="col">Detalle</th>
+                                    </thead>
+                                    @foreach ($incidencias as $incidencia)
+                                    <tr>
+                                        <th scope="row">{{ $incidencia->id }}</th>
+                                        <td>{{ $incidencia->nombre_proceso.". ".$incidencia->ciclo }}</td>
+                                        <td>{{ $incidencia->descripcion }}</td>
+                                        <td>
+                                            @if ($incidencia->desc_estatus == "En proceso")
+                                                <?php $label = "success"; ?>
+                                            @endif
+                                            @if ($incidencia->desc_estatus == "Cerrado")
+                                                <?php $label = "danger"; ?>
+                                            @endif
+                                            <small class="d-inline-flex mb-3 px-2 py-1 fw-semibold text-{{ $label }} bg-{{ $label }} bg-opacity-10 border border-{{ $label }} border-opacity-10 rounded-2">{{ $incidencia->desc_estatus }}</small>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-success btn-sm"><img src="{{ asset('img/view.png') }}"  alt="Ver detalle de la incidencia" title="Ver detalle de la incidencia"></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </table>
+                                @else
+                                {{-- Si no existen incidencias despliega mensaje --}}
                                 <div class="alert alert-warning d-flex align-items-center" role="alert">
                                     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="warning:">
                                         <use xlink:href="#exclamation-triangle-fill" />
@@ -91,22 +125,7 @@
                                         No se encontraron incidencias reportadas del aspirante.
                                     </div>
                                 </div> 
-                                <!--<table class="table table-striped">
-                                    <thead>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Proceso</th>
-                                        <th scope="col">Descripción</th>
-                                        <th scope="col">Estatus</th>
-                                        <th scope="col"></th>
-                                    </thead>
-                                    <tr>
-                                        <th scope="row">Formación docente pedagógica</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </table>-->
+                                @endif
                             </div>
                         </div>
                     </div>

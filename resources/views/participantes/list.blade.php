@@ -69,14 +69,14 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic outlined example">
                                 <a href="{{ route('participantes.detail-proceso', ['participacion_id' => $participante->participacion_id]) }}"
-                                    class="btn btn-success btn-sm"><img src="{{ asset('img/view.png') }}"
-                                        alt="Ver resultatos completos" title="Ver resultatos completos"></a>
+                                    class="btn btn-success btn-sm"><i class="bi bi-eye-fill" title="Ver detalle"></i>
+                                </a>
                                 <a href="{{ route('participantes.details', ['participante_id' => $participante->participante_id]) }}"
-                                    class="btn btn-primary btn-sm"><img src="{{ asset('img/participante.png') }}"
-                                    alt="Ver datos del participante" title="Ver datos completos del participante"></a>
+                                    class="btn btn-primary btn-sm"><i class="bi bi-file-earmark-person-fill" title="Ver datos completos del participante"></i>
+                                </a>
                                 <a href="{{ route('participantes.incidencias', ['participante_id' => $participante->participante_id, 'participacion_id' => $participante->participacion_id]) }}"
-                                    class="btn btn-secondary btn-sm"><img src="{{ asset('img/warning.png') }}"
-                                    alt="Incidencias" title="Incidencias"></a>
+                                    class="btn btn-secondary btn-sm"><i class="bi bi-exclamation-circle-fill" title="Incidencias"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>

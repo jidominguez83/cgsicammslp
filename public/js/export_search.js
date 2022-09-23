@@ -1,4 +1,4 @@
-var localhost = 'http://127.0.0.1:8000';
+var localhost = 'http://http://127.0.0.1:8000';
 
 export class search{
     constructor(myurlp, mysearchp, ul_add_lip){
@@ -67,7 +67,7 @@ export class search{
             this.ul_add_li.innerHTML += `
                 <li class="list-group-item" id="${n+this.idli}">
                     <a href="/participantes/detalles/${item.id}" class="btn btn-light">
-                        <strong>${data_curp.substr(0,valor.length)}</strong>${data_curp.substr(valor.length)} - ${item.nombre}
+                        <strong>${data_curp.substr(0,valor.length)}</strong>${data_curp.substr(valor.length)} - ${item.nombre} ${item.apellido_paterno} ${item.apellido_materno}
                     </a>
                 </li>
             `;

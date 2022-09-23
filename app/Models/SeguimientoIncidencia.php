@@ -9,6 +9,8 @@ use App\Models\Incidencia;
 class SeguimientoIncidencia extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
     
     /**
      * The attributes that are mass assignable.
@@ -16,8 +18,10 @@ class SeguimientoIncidencia extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'incidencia_id',
         'respuesta',
-        'atendido_por'
+        'atendido_por',
+        'added_at'
     ];
 
     public function incidencia(){
