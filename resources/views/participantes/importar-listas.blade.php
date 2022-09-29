@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -15,6 +20,7 @@
                             <a href="/docs/layout_resultados_admision.xlsx" class="btn btn-success"><img src="/img/excel.png" alt="Excel-logo"> &nbsp; Descargar layout</a>
                             <br><br>
                             <form method="POST" action="#" enctype="multipart/form-data">
+                                @csrf
                                 <div class="mb-3 col-auto">
                                     <input class="form-control" type="file" id="formFile" name="import_file">
                                 </div>

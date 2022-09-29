@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ParticipacionProcesosImport;
 use App\Models\Incidencia;
 use App\Models\TipoValoracion;
 use App\Models\ParticipacionProceso;
 use App\Models\Proceso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ParticipacionProcesoController extends Controller
 {
@@ -108,7 +110,9 @@ class ParticipacionProcesoController extends Controller
         ]);
     }
 
-    public function subirLista(){
-        
+    public function subirLista(Request $request){
+        $file = $request->file('import_file');
+        Excel::import(new ParticipacionProcesosImport, $file);
+        return redirect()->route('subir-lista')->width('success', 'El listado de ordenamiento se cargó correctamente');
     }
 }

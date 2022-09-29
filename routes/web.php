@@ -29,6 +29,7 @@ Route::post('/participantes/buscar', [ParticipanteController::class, 'search'])-
 Route::get('/participantes/incidencias/{participante_id?}/{participacion_id?}', [IncidenciaController::class, 'create'])->name('participantes.incidencias');
 Route::post('/participantes/incidencias/save', [IncidenciaController::class, 'save'])->name('incidencias.save');
 Route::get('/importar-listas/{proceso_id?}/{ciclo?}', [ParticipacionProcesoController::class, 'importar'])->name('participantes.importar-listas');
+Route::post('subir-lista', [ParticipacionProcesoController::class, 'subirLista'])->name('subir-lista');
 
 Auth::routes();
 
